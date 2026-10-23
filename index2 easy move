@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy Move - Mais Equilíbrio, Força e Autonomia no seu Dia a Dia</title>
+  <meta name="description" content="Plataforma de exercícios físicos personalizados e aulas em grupo para pessoas idosas (60+). Mais equilíbrio, mobilidade e segurança com acompanhamento profissional especializado.">
+
+  <!-- ====================================================================
+       TIPOGRAFIA DE ALTA LEGIBILIDADE (ATKINSON HYPERLEGIBLE & LEXEND)
+       Projetadas especificamente para máxima clareza e pessoas com baixa visão
+       ==================================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIÁVEIS DE COR E SISTEMA DE DESIGN (EXATAMENTE AS CORES DO PROJETO)
+       Em conformidade estrita com o padrão WCAG AA / AAA de contraste
+       ========================================================================== */
+    :root {
+      /* Paleta oficial Easy Move */
+      --verde-petroleo: #365659; /* Cor primária: cabeçalho, títulos, botões primários, rodapé */
+      --verde-medio: #537364;    /* Cor secundária: botões secundários, ícones, faixas e bordas */
+      --verde-claro: #698C6E;    /* Apenas decorativa e textos grandes (≥24px em negrito) */
+      --off-white: #F2F0EB;      /* Fundo principal da página e fundo de cards claros */
+      --preto: #0D0D0D;          /* Texto do corpo sobre fundo claro */
+      --branco: #FFFFFF;         /* Branco puro para texto em fundos escuros e cards destacados */
+
+      /* Variáveis de layout dinâmicas */
+      --cor-fundo-pagina: var(--off-white);
+      --cor-fundo-card: var(--branco);
+      --cor-texto-corpo: var(--preto);
+      --cor-titulos: var(--verde-petroleo);
+      --cor-borda: rgba(54, 86, 89, 0.2);
+
+      /* Tipografia e Escala (Fonte base grande: 20px) */
+      --fator-fonte: 1; /* Modificado pelos botões de acessibilidade A+ e A- */
+      --tamanho-base: calc(20px * var(--fator-fonte));
+      --linha-base: 1.65;
+      --fonte-principal: 'Lexend', 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+
+      /* Raios de curvatura e elevações */
+      --raio-card: 16px;
+      --raio-pequeno: 12px;
+      --raio-botao: 999px; /* Botões tipo pílula com cantos confortáveis */
+      --sombra-suave: 0 4px 18px rgba(13, 13, 13, 0.06);
+      --sombra-destaque: 0 8px 24px rgba(54, 86, 89, 0.12);
+
+      /* Alvo de toque mínimo acessível (pelo menos 48px de altura) */
+      --altura-minima-alvo: 48px;
+    }
+
+    /* ==========================================================================
+       MODO ALTO CONTRASTE (WCAG AAA)
+       Ativado pelo botão no topo: Fundo #0D0D0D, texto branco, botões brancos c/ texto preto
+       ========================================================================== */
+    html.alto-contraste {
+      --cor-fundo-pagina: #0D0D0D;
+      --cor-fundo-card: #181818;
+      --cor-texto-corpo: #FFFFFF;
+      --cor-titulos: #FFFFFF;
+      --verde-petroleo: #000000;
+      --verde-medio: #FFFFFF;
+      --verde-claro: #FFFFFF;
+      --off-white: #0D0D0D;
+      --preto: #FFFFFF;
+      --cor-borda: #FFFFFF;
+      --sombra-suave: none;
+      --sombra-destaque: none;
+    }
+
+    html.alto-contraste body {
+      background-color: #0D0D0D !important;
+      color: #FFFFFF !important;
+    }
+
+    html.alto-contraste .secao-clara,
+    html.alto-contraste .secao-offwhite,
+    html.alto-contraste .secao-destaque-petroleo,
+    html.alto-contraste header,
+    html.alto-contraste footer,
+    html.alto-contraste .faixa-acessibilidade {
+      background-color: #0D0D0D !important;
+      color: #FFFFFF !important;
+      border-color: #FFFFFF !important;
+    }
+
+    html.alto-contraste h1,
+    html.alto-contraste h2,
+    html.alto-contraste h3,
+    html.alto-contraste h4,
+    html.alto-contraste strong,
+    html.alto-contraste p,
+    html.alto-contraste span,
+    html.alto-contraste a {
+      color: #FFFFFF !important;
+    }
+
+    html.alto-contraste .card,
+    html.alto-contraste .etapa-card,
+    html.alto-contraste .depoimento-card,
+    html.alto-contraste .faq-item,
+    html.alto-contraste .caixa-seguranca {
+      background-color: #161616 !important;
+      border: 2px solid #FFFFFF !important;
+      color: #FFFFFF !important;
+    }
+
+    html.alto-contraste .btn-principal,
+    html.alto-contraste .btn-secundario,
+    html.alto-contraste .btn-header {
+      background-color: #FFFFFF !important;
+      color: #0D0D0D !important;
+      border: 3px solid #FFFFFF !important;
+      font-weight: 800 !important;
+    }
+
+    html.alto-contraste .btn-principal:hover,
+    html.alto-contraste .btn-secundario:hover,
+    html.alto-contraste .btn-header:hover {
+      background-color: #E0E0E0 !important;
+      color: #0D0D0D !important;
+    }
+
+    html.alto-contraste .numero-etapa {
+      background-color: #FFFFFF !important;
+      color: #0D0D0D !important;
+      border: 2px solid #FFFFFF !important;
+    }
+
+    html.alto-contraste svg path,
+    html.alto-contraste svg circle,
+    html.alto-contraste svg rect {
+      stroke: #FFFFFF !important;
+      fill: none !important;
+    }
+
+    html.alto-contraste .icone-redondo {
+      background-color: #222222 !important;
+      border: 2px solid #FFFFFF !important;
+    }
+
+    /* ==========================================================================
+       RESET E ESTILOS GERAIS
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--tamanho-base);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--fonte-principal);
+      font-size: 1rem;
+      line-height: var(--linha-base);
+      color: var(--cor-texto-corpo);
+      background-color: var(--cor-fundo-pagina);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* Respeito à preferência de movimento reduzido (Acessibilidade) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Indicador de foco bem visível para navegação por teclado (WCAG 2.4.7) */
+    :focus-visible {
+      outline: 3px solid var(--preto);
+      outline-offset: 4px;
+    }
+
+    /* Link invisível que surge ao navegar por TAB para pular direto ao conteúdo */
+    .link-pular {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      padding: 14px 24px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: var(--raio-pequeno);
+      z-index: 9999;
+      text-decoration: underline;
+      transition: top 0.2s ease;
+      min-height: var(--altura-minima-alvo);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .link-pular:focus {
+      top: 12px;
+      outline: 3px solid var(--branco);
+      box-shadow: 0 0 0 6px var(--preto);
+    }
+
+    /* Classe utilitária para leitores de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Contêiner comum centralizado */
+    .conteiner {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* ==========================================================================
+       1. BARRA DE ACESSIBILIDADE (TOPO)
+       Ajuste de fonte (A+, A-), Restaurar e Modo Alto Contraste
+       ========================================================================== */
+    .faixa-acessibilidade {
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      z-index: 100;
+    }
+
+    .acessibilidade-conteudo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .acessibilidade-rotulo {
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .acessibilidade-botoes {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-acessibilidade {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 6px 14px;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: var(--branco);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: var(--raio-pequeno);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .btn-acessibilidade:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-color: var(--branco);
+    }
+
+    .btn-acessibilidade:focus-visible {
+      outline: 3px solid var(--branco);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       2. CABEÇALHO E MENU DE NAVEGAÇÃO
+       Botão hambúrguer com texto VISÍVEL "Menu" para mobile
+       ========================================================================== */
+    header.cabecalho-principal {
+      background-color: var(--branco);
+      border-bottom: 2px solid rgba(54, 86, 89, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .cabecalho-conteudo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      gap: 16px;
+    }
+
+    /* Logotipo Easy Move */
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--verde-petroleo);
+      min-height: var(--altura-minima-alvo);
+    }
+
+    .logo-simbolo {
+      width: 44px;
+      height: 44px;
+      background-color: var(--verde-petroleo);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--branco);
+      flex-shrink: 0;
+    }
+
+    .logo-texto {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-nome {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      color: var(--verde-petroleo);
+    }
+
+    .logo-slogan {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--verde-medio);
+      letter-spacing: 0.2px;
+    }
+
+    /* Botão Mobile Hamburger com texto 'Menu' visível */
+    .btn-menu-mobile {
+      display: none; /* Oculto em telas médias e grandes */
+      align-items: center;
+      gap: 10px;
+      min-height: var(--altura-minima-alvo);
+      padding: 8px 16px;
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      border: 2px solid transparent;
+      border-radius: var(--raio-pequeno);
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-menu-mobile:focus-visible {
+      outline: 3px solid var(--preto);
+      outline-offset: 3px;
+    }
+
+    .icone-menu-barras {
+      display: inline-block;
+      width: 22px;
+      height: 16px;
+      position: relative;
+    }
+
+    .icone-menu-barras span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: var(--branco);
+      border-radius: 2px;
+      left: 0;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .icone-menu-barras span:nth-child(1) { top: 0; }
+    .icone-menu-barras span:nth-child(2) { top: 6px; }
+    .icone-menu-barras span:nth-child(3) { top: 12px; }
+
+    /* Estado aberto do menu mobile */
+    .btn-menu-mobile[aria-expanded="true"] .icone-menu-barras span:nth-child(1) {
+      top: 6px;
+      transform: rotate(135deg);
+    }
+    .btn-menu-mobile[aria-expanded="true"] .icone-menu-barras span:nth-child(2) {
+      opacity: 0;
+      left: -10px;
+    }
+    .btn-menu-mobile[aria-expanded="true"] .icone-menu-barras span:nth-child(3) {
+      top: 6px;
+      transform: rotate(-135deg);
+    }
+
+    /* Navegação Desktop */
+    .menu-navegacao {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .lista-navegacao {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .link-navegacao {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--altura-minima-alvo);
+      padding: 8px 14px;
+      text-decoration: none;
+      color: var(--verde-petroleo);
+      font-weight: 600;
+      font-size: 1.05rem;
+      border-radius: var(--raio-pequeno);
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .link-navegacao:hover {
+      background-color: rgba(54, 86, 89, 0.08);
+      text-decoration: underline;
+    }
+
+    .link-navegacao:focus-visible {
+      outline: 3px solid var(--preto);
+      outline-offset: 2px;
+    }
+
+    /* Botões Padrão de Ação */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: var(--altura-minima-alvo);
+      padding: 12px 28px;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: var(--raio-botao);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Botão Principal (CTA): fundo #365659, texto branco, contorno de 3px em #0D0D0D ao receber foco */
+    .btn-principal {
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      border: 2px solid transparent;
+      box-shadow: 0 4px 12px rgba(54, 86, 89, 0.25);
+    }
+
+    .btn-principal:hover {
+      background-color: #294345;
+      color: var(--branco);
+      box-shadow: 0 6px 16px rgba(54, 86, 89, 0.35);
+    }
+
+    .btn-principal:focus-visible {
+      outline: 3px solid var(--preto);
+      outline-offset: 4px;
+    }
+
+    /* Botão Secundário: fundo transparente, borda #365659 de 2px, texto #365659 */
+    .btn-secundario {
+      background-color: transparent;
+      color: var(--verde-petroleo);
+      border: 2px solid var(--verde-petroleo);
+    }
+
+    .btn-secundario:hover {
+      background-color: rgba(54, 86, 89, 0.08);
+      color: var(--verde-petroleo);
+    }
+
+    .btn-secundario:focus-visible {
+      outline: 3px solid var(--preto);
+      outline-offset: 4px;
+    }
+
+    /* Botão invertido para faixas de fundo escuro */
+    .btn-branco {
+      background-color: var(--branco);
+      color: var(--verde-petroleo);
+      border: 2px solid var(--branco);
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-branco:hover {
+      background-color: var(--off-white);
+      color: #1e3335;
+    }
+
+    .btn-branco:focus-visible {
+      outline: 3px solid var(--branco);
+      outline-offset: 4px;
+    }
+
+    /* ==========================================================================
+       ESTILOS DE SEÇÃO E TÍTULOS
+       Alternância entre fundo #F2F0EB e #FFFFFF, com faixas em #365659
+       ========================================================================== */
+    section {
+      padding: 70px 0;
+    }
+
+    .secao-offwhite {
+      background-color: var(--off-white);
+    }
+
+    .secao-clara {
+      background-color: var(--branco);
+    }
+
+    .secao-destaque-petroleo {
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+    }
+
+    /* Títulos: #365659 sobre #F2F0EB (~7:1 contraste) */
+    .titulo-secao {
+      font-size: clamp(1.8rem, 4vw, 2.3rem);
+      font-weight: 800;
+      color: var(--verde-petroleo);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .secao-destaque-petroleo .titulo-secao {
+      color: var(--branco);
+    }
+
+    .subtitulo-secao {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: var(--cor-texto-corpo);
+      max-width: 780px;
+      margin-bottom: 40px;
+    }
+
+    .secao-destaque-petroleo .subtitulo-secao {
+      color: #E6ECE8;
+    }
+
+    .cabecalho-bloco-secao {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .cabecalho-bloco-secao .subtitulo-secao {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Selo / Tag de Seção */
+    .tag-secao {
+      display: inline-block;
+      background-color: rgba(83, 115, 100, 0.15);
+      color: var(--verde-petroleo);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(83, 115, 100, 0.3);
+    }
+
+    .secao-destaque-petroleo .tag-secao {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: var(--branco);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ==========================================================================
+       3. SEÇÃO HERO (BOAS-VINDAS)
+       Título forte e acolhedor, subtítulo claro, 2 botões e imagem de apoio
+       ========================================================================== */
+    .hero-secao {
+      padding: 60px 0 70px;
+      background-color: var(--off-white);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 50px;
+      }
+    }
+
+    .hero-conteudo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-titulo {
+      font-size: clamp(2.1rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--verde-petroleo);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitulo {
+      font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+      line-height: 1.6;
+      color: var(--preto);
+      margin-bottom: 32px;
+    }
+
+    .hero-acoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 36px;
+      width: 100%;
+    }
+
+    /* Destaques rápidos de confiança no Hero */
+    .hero-vantagens-rapidas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 2px solid rgba(54, 86, 89, 0.15);
+      width: 100%;
+    }
+
+    .item-vantagem-rapida {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--verde-petroleo);
+    }
+
+    .icone-checado {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: var(--verde-medio);
+      color: var(--branco);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* Card visual com imagem do Hero */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-moldura-imagem {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--sombra-destaque);
+      background-color: var(--branco);
+      border: 4px solid var(--branco);
+    }
+
+    .hero-imagem {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 4 / 3.2;
+    }
+
+    /* Cartão flutuante informativo sobre a avaliação */
+    .hero-card-flutuante {
+      position: absolute;
+      bottom: -20px;
+      left: 20px;
+      right: 20px;
+      background-color: var(--branco);
+      padding: 16px 20px;
+      border-radius: var(--raio-card);
+      box-shadow: 0 10px 28px rgba(13, 13, 13, 0.12);
+      border-left: 6px solid var(--verde-medio);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-card-flutuante p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: var(--preto);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       4. SEÇÃO BENEFÍCIOS
+       4 cards com ícones grandes (Equilíbrio, Mobilidade, Fortalecimento, Autonomia)
+       ========================================================================== */
+    .grid-beneficios {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .grid-beneficios {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid-beneficios {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .card-beneficio {
+      background-color: var(--cor-fundo-card);
+      border-radius: var(--raio-card);
+      padding: 32px 24px;
+      border: 2px solid rgba(54, 86, 89, 0.1);
+      box-shadow: var(--sombra-suave);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card-beneficio:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sombra-destaque);
+      border-color: var(--verde-medio);
+    }
+
+    .icone-beneficio-grande {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--raio-pequeno);
+      background-color: rgba(83, 115, 100, 0.12);
+      color: var(--verde-petroleo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .titulo-beneficio {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--verde-petroleo);
+      margin-bottom: 12px;
+    }
+
+    .texto-beneficio {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--preto);
+    }
+
+    /* ==========================================================================
+       5. COMO FUNCIONA (4 ETAPAS NUMERADAS)
+       1. Avaliação com profissional habilitado
+       2. Exercícios personalizados para você
+       3. Pratique no seu ritmo
+       4. Participe das aulas em grupo
+       ========================================================================== */
+    .grid-etapas {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      counter-reset: etapa;
+    }
+
+    @media (min-width: 640px) {
+      .grid-etapas {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid-etapas {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .card-etapa {
+      background-color: var(--off-white);
+      border-radius: var(--raio-card);
+      padding: 32px 24px;
+      border: 2px solid rgba(54, 86, 89, 0.12);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Número da etapa em verde claro / petróleo, grande e em negrito (≥24px) */
+    .numero-etapa {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      font-size: 1.5rem; /* ≥ 24px */
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(54, 86, 89, 0.2);
+    }
+
+    .titulo-etapa {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--verde-petroleo);
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .texto-etapa {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--preto);
+    }
+
+    /* ==========================================================================
+       6. AULAS E ATIVIDADES COLETIVAS
+       Supervisão de profissionais e apoio de estudantes, convivência e acolhimento
+       ========================================================================== */
+    .bloco-aulas-coletivas {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .bloco-aulas-coletivas {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .imagem-aulas-moldura {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--sombra-destaque);
+      border: 4px solid var(--branco);
+    }
+
+    .imagem-aulas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 320px;
+    }
+
+    .lista-destaques-aulas {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin: 28px 0;
+    }
+
+    .item-destaque-aula {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .icone-ponto-aula {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(83, 115, 100, 0.18);
+      color: var(--verde-petroleo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .texto-destaque-aula strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--verde-petroleo);
+      margin-bottom: 4px;
+    }
+
+    .texto-destaque-aula p {
+      font-size: 1.05rem;
+      color: var(--preto);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       7. SEGURANÇA E CONFIANÇA
+       Bloco reforçando avaliação por profissional e acompanhamento permanente
+       ========================================================================== */
+    .caixa-seguranca {
+      background-color: var(--off-white);
+      border: 3px solid var(--verde-medio);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: var(--sombra-suave);
+    }
+
+    .seguranca-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    @media (min-width: 800px) {
+      .seguranca-grid {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .seguranca-itens-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .seguranca-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background-color: var(--branco);
+      padding: 16px 20px;
+      border-radius: var(--raio-pequeno);
+      border-left: 5px solid var(--verde-petroleo);
+    }
+
+    .seguranca-item-icone {
+      color: var(--verde-petroleo);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .seguranca-item-texto strong {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--verde-petroleo);
+      margin-bottom: 2px;
+    }
+
+    .seguranca-item-texto p {
+      font-size: 1rem;
+      color: var(--preto);
+    }
+
+    /* ==========================================================================
+       8. DEPOIMENTOS
+       2 a 3 relatos fictícios claramente marcados como exemplos a substituir
+       ========================================================================== */
+    .aviso-depoimento-ficticio {
+      display: inline-block;
+      background-color: #E6ECE8;
+      color: var(--verde-petroleo);
+      border: 1px dashed var(--verde-medio);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+
+    .grid-depoimentos {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 768px) {
+      .grid-depoimentos {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card-depoimento {
+      background-color: var(--branco);
+      border-radius: var(--raio-card);
+      padding: 32px 24px;
+      border: 2px solid rgba(54, 86, 89, 0.12);
+      box-shadow: var(--sombra-suave);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .depoimento-corpo {
+      margin-bottom: 24px;
+    }
+
+    .icone-aspas {
+      color: var(--verde-claro);
+      margin-bottom: 12px;
+    }
+
+    .texto-depoimento {
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--preto);
+    }
+
+    .depoimento-autor {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(54, 86, 89, 0.15);
+    }
+
+    .autor-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .autor-info strong {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--verde-petroleo);
+    }
+
+    .autor-info span {
+      font-size: 0.95rem;
+      color: var(--preto);
+    }
+
+    /* ==========================================================================
+       9. PERGUNTAS FREQUENTES (ACCORDION ACESSÍVEL)
+       Interação suave, suporte a teclado (Enter/Espaço) e ARIA states
+       ========================================================================== */
+    .lista-faq {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background-color: var(--branco);
+      border-radius: var(--raio-pequeno);
+      border: 2px solid rgba(54, 86, 89, 0.15);
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--verde-medio);
+    }
+
+    .faq-botao {
+      width: 100%;
+      min-height: 60px;
+      padding: 18px 24px;
+      background-color: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--verde-petroleo);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-botao:focus-visible {
+      outline: 3px solid var(--preto);
+      outline-offset: -3px;
+    }
+
+    .faq-icone-seta {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(54, 86, 89, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-botao[aria-expanded="true"] .faq-icone-seta {
+      transform: rotate(180deg);
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+    }
+
+    .faq-resposta {
+      padding: 0 24px 22px 24px;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--preto);
+      border-top: 1px solid rgba(54, 86, 89, 0.1);
+      padding-top: 16px;
+    }
+
+    .faq-resposta[hidden] {
+      display: none;
+    }
+
+    /* ==========================================================================
+       10. CHAMADA FINAL (CTA)
+       Faixa em #365659 com texto branco convidando a agendar a avaliação
+       ========================================================================== */
+    .secao-cta-final {
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .cta-conteudo-central {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .cta-titulo {
+      font-size: clamp(2rem, 4.5vw, 2.7rem);
+      font-weight: 800;
+      color: var(--branco);
+      margin-bottom: 20px;
+      line-height: 1.25;
+    }
+
+    .cta-texto {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #E6ECE8;
+      margin-bottom: 36px;
+    }
+
+    .cta-botoes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    /* ==========================================================================
+       11. RODAPÉ (FOOTER)
+       Logo, links, contato (tel, e-mail, WhatsApp), redes sociais e aviso médico
+       ========================================================================== */
+    footer.rodape-principal {
+      background-color: var(--verde-petroleo);
+      color: var(--branco);
+      padding: 60px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .rodape-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    @media (min-width: 640px) {
+      .rodape-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .rodape-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 50px;
+      }
+    }
+
+    .rodape-coluna-info .logo-link {
+      color: var(--branco);
+      margin-bottom: 16px;
+    }
+
+    .rodape-coluna-info .logo-simbolo {
+      background-color: var(--branco);
+      color: var(--verde-petroleo);
+    }
+
+    .rodape-coluna-info .logo-nome {
+      color: var(--branco);
+    }
+
+    .rodape-coluna-info .logo-slogan {
+      color: #D3E0D6;
+    }
+
+    .rodape-descricao {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #E6ECE8;
+      margin-bottom: 24px;
+    }
+
+    .titulo-coluna-rodape {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--branco);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .lista-rodape-links,
+    .lista-rodape-contatos {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-rodape {
+      color: #E6ECE8;
+      text-decoration: none;
+      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      transition: color 0.2s, text-decoration 0.2s;
+    }
+
+    .link-rodape:hover {
+      color: var(--branco);
+      text-decoration: underline;
+    }
+
+    .link-rodape:focus-visible {
+      outline: 3px solid var(--branco);
+      outline-offset: 3px;
+    }
+
+    .redes-sociais-lista {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn-rede-social {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: var(--branco);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .btn-rede-social:hover {
+      background-color: var(--branco);
+      color: var(--verde-petroleo);
+      transform: translateY(-2px);
+    }
+
+    .btn-rede-social:focus-visible {
+      outline: 3px solid var(--branco);
+      outline-offset: 3px;
+    }
+
+    /* Aviso importante de saúde no rodapé (Aviso Médico) */
+    .aviso-medico-rodape {
+      background-color: rgba(0, 0, 0, 0.25);
+      border-left: 5px solid var(--verde-claro);
+      padding: 20px;
+      border-radius: var(--raio-pequeno);
+      margin-bottom: 30px;
+    }
+
+    .aviso-medico-rodape strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--branco);
+      margin-bottom: 6px;
+    }
+
+    .aviso-medico-rodape p {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #E6ECE8;
+    }
+
+    .rodape-direitos {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.95rem;
+      color: #D3E0D6;
+    }
+
+    /* ==========================================================================
+       RESPONSIVIDADE (MOBILE-FIRST)
+       Ajustes para celulares e telas menores que 900px
+       ========================================================================== */
+    @media (max-width: 899px) {
+      .btn-menu-mobile {
+        display: inline-flex;
+      }
+
+      .menu-navegacao {
+        display: none; /* Fechado por padrão no mobile */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--branco);
+        border-bottom: 3px solid var(--verde-petroleo);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+
+      .menu-navegacao.menu-aberto {
+        display: flex;
+      }
+
+      .lista-navegacao {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .link-navegacao {
+        padding: 14px 18px;
+        font-size: 1.15rem;
+        border-radius: var(--raio-pequeno);
+        background-color: var(--off-white);
+        width: 100%;
+      }
+
+      .menu-navegacao .btn-principal {
+        width: 100%;
+        margin-top: 8px;
+      }
+
+      .hero-card-flutuante {
+        position: static;
+        margin-top: 16px;
+      }
+
+      .hero-acoes .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       LINK ACESSÍVEL PARA PULAR PARA O CONTEÚDO PRINCIPAL (WCAG 2.4.1)
+       ========================================================================== -->
+  <a href="#conteudo-principal" class="link-pular">Pular para o conteúdo principal</a>
+
+  <!-- Área invisível para leitores de tela anunciarem mudanças de acessibilidade -->
+  <div id="status-leitor-tela" class="sr-only" aria-live="polite"></div>
+
+  <!-- ==========================================================================
+       1. BARRA DE ACESSIBILIDADE
+       Botões A+, A- para redimensionar fonte e botão de Alto Contraste
+       ========================================================================== -->
+  <aside class="faixa-acessibilidade" aria-label="Ferramentas de acessibilidade">
+    <div class="conteiner acessibilidade-conteudo">
+      <div class="acessibilidade-rotulo">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 8v8"></path>
+          <path d="M8 12h8"></path>
+        </svg>
+        <span>Recursos de Acessibilidade:</span>
+      </div>
+
+      <div class="acessibilidade-botoes">
+        <button id="btn-aumentar-fonte" class="btn-acessibilidade" type="button" aria-label="Aumentar tamanho do texto">
+          <span aria-hidden="true">A+</span>
+          <span>Aumentar texto</span>
+        </button>
+
+        <button id="btn-diminuir-fonte" class="btn-acessibilidade" type="button" aria-label="Diminuir tamanho do texto">
+          <span aria-hidden="true">A−</span>
+          <span>Diminuir texto</span>
+        </button>
+
+        <button id="btn-resetar-fonte" class="btn-acessibilidade" type="button" aria-label="Restaurar tamanho normal do texto">
+          <span aria-hidden="true">A</span>
+          <span>Texto normal</span>
+        </button>
+
+        <button id="btn-alto-contraste" class="btn-acessibilidade" type="button" aria-pressed="false" aria-label="Ativar modo de alto contraste visual">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"></circle>
+            <path d="M12 3a9 9 0 0 1 0 18V3z"></path>
+          </svg>
+          <span id="texto-btn-contraste">Alto Contraste</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       2. CABEÇALHO PRINCIPAL
+       Logotipo, Menu com rótulo 'Menu' visível no mobile e botão 'Quero começar'
+       ========================================================================== -->
+  <header class="cabecalho-principal" role="banner">
+    <div class="conteiner cabecalho-conteudo">
+      
+      <!-- Logotipo Easy Move -->
+      <a href="#inicio" class="logo-link" aria-label="Easy Move - Página inicial">
+        <div class="logo-simbolo" aria-hidden="true">
+          <!-- Ícone estilizado de pessoa em movimento harmônico -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="4" r="2"></circle>
+            <path d="m15 11-3-2-3 2v4l3 3 3-3z"></path>
+            <path d="M6 13l3-1"></path>
+            <path d="M18 13l-3-1"></path>
+            <path d="m9 19 3 3 3-3"></path>
+          </svg>
+        </div>
+        <div class="logo-texto">
+          <span class="logo-nome">Easy Move</span>
+          <span class="logo-slogan">Movimento seguro e bem-estar</span>
+        </div>
+      </a>
+
+      <!-- Botão Hambúrguer Mobile com texto 'Menu' VISÍVEL -->
+      <button id="btn-menu-mobile" class="btn-menu-mobile" type="button" aria-expanded="false" aria-controls="menu-navegacao-principal" aria-label="Menu principal de navegação">
+        <div class="icone-menu-barras" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span>Menu</span>
+      </button>
+
+      <!-- Menu de Navegação -->
+      <nav id="menu-navegacao-principal" class="menu-navegacao" aria-label="Navegação do site">
+        <ul class="lista-navegacao">
+          <li><a href="#inicio" class="link-navegacao">Início</a></li>
+          <li><a href="#como-funciona" class="link-navegacao">Como funciona</a></li>
+          <li><a href="#aulas-grupo" class="link-navegacao">Aulas em grupo</a></li>
+          <li><a href="#quem-somos" class="link-navegacao">Quem somos</a></li>
+          <li><a href="#contato" class="link-navegacao">Contato</a></li>
+        </ul>
+        <a href="#agendar" class="btn btn-principal btn-header">Quero começar</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       CONTEÚDO PRINCIPAL DA PÁGINA
+       ========================================================================== -->
+  <main id="conteudo-principal">
+
+    <!-- ========================================================================
+         3. HERO SECTION
+         Título forte, acolhedor, subtítulo claro, CTAs e imagem de idoso ativo
+         ======================================================================== -->
+    <section id="inicio" class="hero-secao" aria-labelledby="titulo-hero">
+      <div class="conteiner hero-grid">
+        
+        <div class="hero-conteudo">
+          <span class="tag-secao">Bem-vindo(a) ao Easy Move</span>
+          <h1 id="titulo-hero" class="hero-titulo">
+            Mais equilíbrio, mais força e mais autonomia no seu dia a dia
+          </h1>
+          <p class="hero-subtitulo">
+            Exercícios físicos seguros, suaves e personalizados para você viver com mais disposição, prevenir quedas e ter total liberdade para aproveitar cada momento.
+          </p>
+
+          <div class="hero-acoes">
+            <a href="#agendar" class="btn btn-principal">Agendar minha avaliação</a>
+            <a href="#como-funciona" class="btn btn-secundario">Saber mais</a>
+          </div>
+
+          <!-- Destaques rápidos de segurança -->
+          <div class="hero-vantagens-rapidas">
+            <div class="item-vantagem-rapida">
+              <span class="icone-checado" aria-hidden="true">✓</span>
+              <span>Avaliação individual prévia</span>
+            </div>
+            <div class="item-vantagem-rapida">
+              <span class="icone-checado" aria-hidden="true">✓</span>
+              <span>Acompanhamento profissional</span>
+            </div>
+            <div class="item-vantagem-rapida">
+              <span class="icone-checado" aria-hidden="true">✓</span>
+              <span>No seu próprio ritmo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-moldura-imagem">
+            <!-- Imagem acolhedora de idosos ativos e sorridentes -->
+            <img 
+              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" 
+              alt="Mulher madura sorrindo com vitalidade durante prática de alongamento ao ar livre em dia ensolarado" 
+              class="hero-imagem"
+              loading="eager"
+            >
+          </div>
+
+          <!-- Card de destaque com informação acolhedora -->
+          <div class="hero-card-flutuante">
+            <div class="icone-beneficio-grande" style="margin-bottom: 0; width: 48px; height: 48px;" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+              </svg>
+            </div>
+            <p>Atendimento humano e atencioso: cuidamos de você em cada passo.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. SEÇÃO BENEFÍCIOS
+         4 cards com ícones grandes (Equilíbrio, Mobilidade, Fortalecimento, Autonomia)
+         ======================================================================== -->
+    <section id="beneficios" class="secao-clara" aria-labelledby="titulo-beneficios">
+      <div class="conteiner">
+        
+        <div class="cabecalho-bloco-secao">
+          <span class="tag-secao">Benefícios para a sua vida</span>
+          <h2 id="titulo-beneficios" class="titulo-secao">O que você ganha praticando conosco</h2>
+          <p class="subtitulo-secao">Movimentos simples e eficazes que trazem resultados reais para a sua rotina e para a sua saúde integral.</p>
+        </div>
+
+        <div class="grid-beneficios">
+          
+          <!-- Card 1: Equilíbrio -->
+          <article class="card-beneficio">
+            <div class="icone-beneficio-grande" aria-hidden="true">
+              <!-- Ícone de passos firmes e estabilidade -->
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19h16"></path>
+                <path d="m12 5 7 9-7 2-7-2 7-9Z"></path>
+                <circle cx="12" cy="3" r="1"></circle>
+              </svg>
+            </div>
+            <h3 class="titulo-beneficio">Equilíbrio firme</h3>
+            <p class="texto-beneficio">Previna quedas e caminhe com passos muito mais firmes e confiantes dentro e fora de casa.</p>
+          </article>
+
+          <!-- Card 2: Mobilidade -->
+          <article class="card-beneficio">
+            <div class="icone-beneficio-grande" aria-hidden="true">
+              <!-- Ícone de flexibilidade / amplitude de braços -->
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m18 15-6-6-6 6"></path>
+                <circle cx="12" cy="5" r="2"></circle>
+                <path d="M12 10v10"></path>
+                <path d="m5 21 7-4 7 4"></path>
+              </svg>
+            </div>
+            <h3 class="titulo-beneficio">Mobilidade livre</h3>
+            <p class="texto-beneficio">Alongue o corpo, alivie as articulações e sinta facilidade para se abaixar, alcançar objetos e girar.</p>
+          </article>
+
+          <!-- Card 3: Fortalecimento -->
+          <article class="card-beneficio">
+            <div class="icone-beneficio-grande" aria-hidden="true">
+              <!-- Ícone de força muscular -->
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6.5 6.5 11 11"></path>
+                <path d="m21 21-1-1a2 2 0 0 0-2.83 0l-1.34 1.34a2 2 0 0 1-2.83 0L3 13.34a2 2 0 0 1 0-2.83L4.34 9.17a2 2 0 0 0 0-2.83L3 5"></path>
+                <path d="m18 3 1.34 1.34a2 2 0 0 1 0 2.83L17.17 9.5"></path>
+              </svg>
+            </div>
+            <h3 class="titulo-beneficio">Fortalecimento</h3>
+            <p class="texto-beneficio">Ganhe força nas pernas e braços para subir escadas, levantar da cadeira e carregar sacolas sem esforço excessivo.</p>
+          </article>
+
+          <!-- Card 4: Autonomia -->
+          <article class="card-beneficio">
+            <div class="icone-beneficio-grande" aria-hidden="true">
+              <!-- Ícone de liberdade e bem-estar -->
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 20a6 6 0 0 0-12 0"></path>
+                <circle cx="12" cy="10" r="4"></circle>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 6.34 1.41-1.41"></path>
+              </svg>
+            </div>
+            <h3 class="titulo-beneficio">Total autonomia</h3>
+            <p class="texto-beneficio">Viva o seu dia a dia com independência, realizando seus passeios e afazeres favoritos com total liberdade.</p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. COMO FUNCIONA
+         4 etapas numeradas, claras e sem jargões técnicos
+         ======================================================================== -->
+    <section id="como-funciona" class="secao-offwhite" aria-labelledby="titulo-como-funciona">
+      <div class="conteiner">
+        
+        <div class="cabecalho-bloco-secao">
+          <span class="tag-secao">Passo a passo</span>
+          <h2 id="titulo-como-funciona" class="titulo-secao">Como funciona a sua jornada</h2>
+          <p class="subtitulo-secao">Começar é muito simples, acolhedor e seguro. Veja as 4 etapas preparadas com todo carinho para você:</p>
+        </div>
+
+        <div class="grid-etapas">
+          
+          <!-- Etapa 1 -->
+          <article class="card-etapa">
+            <div class="numero-etapa" aria-label="Etapa número 1">1</div>
+            <h3 class="titulo-etapa">Avaliação com profissional habilitado</h3>
+            <p class="texto-etapa">Conversamos com calma sobre seu histórico de saúde, dores ou limitações para entender com precisão o que seu corpo precisa.</p>
+          </article>
+
+          <!-- Etapa 2 -->
+          <article class="card-etapa">
+            <div class="numero-etapa" aria-label="Etapa número 2">2</div>
+            <h3 class="titulo-etapa">Exercícios personalizados para você</h3>
+            <p class="texto-etapa">Nosso especialista elabora um plano de movimentos sob medida, respeitando seus limites e focando nos seus objetivos pessoais.</p>
+          </article>
+
+          <!-- Etapa 3 -->
+          <article class="card-etapa">
+            <div class="numero-etapa" aria-label="Etapa número 3">3</div>
+            <h3 class="titulo-etapa">Pratique no seu ritmo</h3>
+            <p class="texto-etapa">Você faz os exercícios com instruções claras, vídeos explicativos fáceis de ver e suporte contínuo para tirar qualquer dúvida.</p>
+          </article>
+
+          <!-- Etapa 4 -->
+          <article class="card-etapa">
+            <div class="numero-etapa" aria-label="Etapa número 4">4</div>
+            <h3 class="titulo-etapa">Participe das aulas em grupo</h3>
+            <p class="texto-etapa">Junte-se aos nossos encontros coletivos online ou presenciais, faça novas amizades e mantenha a motivação sempre em alta.</p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         6. AULAS E ATIVIDADES COLETIVAS
+         Supervisão profissional + estudantes de Ed. Física e Fisioterapia
+         ======================================================================== -->
+    <section id="aulas-grupo" class="secao-clara" aria-labelledby="titulo-aulas-grupo">
+      <div class="conteiner">
+        
+        <div class="bloco-aulas-coletivas">
+          
+          <div class="conteudo-aulas">
+            <span class="tag-secao">Convivência e Amizade</span>
+            <h2 id="titulo-aulas-grupo" class="titulo-secao">Aulas e atividades coletivas: exercitar-se faz bem ao coração e à mente</h2>
+            <p class="subtitulo-secao">
+              Nossas aulas em grupo são pensadas para unir saúde física, acolhimento e alegria. Você pratica com a tranquilidade de estar sempre bem amparado(a).
+            </p>
+
+            <ul class="lista-destaques-aulas">
+              <li class="item-destaque-aula">
+                <div class="icone-ponto-aula" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>
+                </div>
+                <div class="texto-destaque-aula">
+                  <strong>Supervisão de profissionais experientes</strong>
+                  <p>Professores de Educação Física e Fisioterapeutas certificados acompanham cada movimento da turma.</p>
+                </div>
+              </li>
+
+              <li class="item-destaque-aula">
+                <div class="icone-ponto-aula" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>
+                </div>
+                <div class="texto-destaque-aula">
+                  <strong>Apoio dedicado de estudantes universitários</strong>
+                  <p>Alunos das melhores faculdades de Fisioterapia e Educação Física dão suporte individual e atenção calorosa a cada participante.</p>
+                </div>
+              </li>
+
+              <li class="item-destaque-aula">
+                <div class="icone-ponto-aula" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>
+                </div>
+                <div class="texto-destaque-aula">
+                  <strong>Espaço de conversa e novas amizades</strong>
+                  <p>Um ambiente seguro, sem julgamentos e com muitas risadas, onde você compartilha experiências e celebra cada conquista.</p>
+                </div>
+              </li>
+            </ul>
+
+            <a href="#agendar" class="btn btn-principal">Conhecer as aulas em grupo</a>
+          </div>
+
+          <div class="imagem-aulas-moldura">
+            <img 
+              src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80" 
+              alt="Grupo de pessoas idosas sorridentes praticando aula de ginástica suave com a orientação carinhosa de instrutores" 
+              class="imagem-aulas"
+              loading="lazy"
+            >
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         7. SEGURANÇA E CONFIANÇA
+         Bloco reforçando avaliação profissional e acompanhamento
+         ======================================================================== -->
+    <section id="quem-somos" class="secao-offwhite" aria-labelledby="titulo-seguranca">
+      <div class="conteiner">
+        
+        <div class="caixa-seguranca">
+          <div class="seguranca-grid">
+            
+            <div>
+              <span class="tag-secao">Segurança em Primeiro Lugar</span>
+              <h2 id="titulo-seguranca" class="titulo-secao">Cuidado sério com a sua saúde</h2>
+              <p style="font-size: 1.15rem; line-height: 1.6; color: var(--preto); margin-bottom: 24px;">
+                No Easy Move, nada é feito ao acaso. Acreditamos que a longevidade ativa começa com respeito aos limites individuais e embasamento científico.
+              </p>
+              <a href="#faq" class="btn btn-secundario">Tire suas dúvidas sobre segurança</a>
+            </div>
+
+            <div class="seguranca-itens-lista">
+              
+              <div class="seguranca-item">
+                <div class="seguranca-item-icone" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
+                <div class="seguranca-item-texto">
+                  <strong>Avaliação inicial indispensável</strong>
+                  <p>Nenhum exercício é iniciado antes de conhecermos detalhadamente sua condição física e seu histórico médico.</p>
+                </div>
+              </div>
+
+              <div class="seguranca-item">
+                <div class="seguranca-item-icone" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 14 14"></polyline>
+                  </svg>
+                </div>
+                <div class="seguranca-item-texto">
+                  <strong>Ajustes contínuos no seu plano</strong>
+                  <p>Reavaliamos seu progresso com frequência para garantir evolução constante sem dores ou desconfortos.</p>
+                </div>
+              </div>
+
+              <div class="seguranca-item">
+                <div class="seguranca-item-icone" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <div class="seguranca-item-texto">
+                  <strong>Canal aberto para cuidadores e familiares</strong>
+                  <p>Filhos, netos e cuidadores podem tirar dúvidas e acompanhar a evolução com facilidade e transparência.</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         8. DEPOIMENTOS
+         2 a 3 depoimentos fictícios claramente marcados como exemplos a substituir
+         ======================================================================== -->
+    <section class="secao-clara" aria-labelledby="titulo-depoimentos">
+      <div class="conteiner">
+        
+        <div class="cabecalho-bloco-secao">
+          <span class="tag-secao">Histórias que inspiram</span>
+          <h2 id="titulo-depoimentos" class="titulo-secao">O que dizem as pessoas que treinam com a gente</h2>
+          <div class="aviso-depoimento-ficticio" role="note">
+            [Exemplo ilustrativo - substitua pelos relatos reais de seus alunos e cuidadores]
+          </div>
+        </div>
+
+        <div class="grid-depoimentos">
+          
+          <!-- Depoimento 1 -->
+          <article class="card-depoimento">
+            <div class="depoimento-corpo">
+              <div class="icone-aspas" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              <p class="texto-depoimento">
+                "Eu tinha muito receio de caminhar na rua e tropeçar. Com os exercícios de equilíbrio do Easy Move, recuperei a confiança. Hoje vou à feira e brinco com meus netos sem medo algum!"
+              </p>
+            </div>
+            <div class="depoimento-autor">
+              <div class="autor-avatar" aria-hidden="true">MH</div>
+              <div class="autor-info">
+                <strong>Dona Maria Helena</strong>
+                <span>68 anos • Aluna há 8 meses</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Depoimento 2 -->
+          <article class="card-depoimento">
+            <div class="depoimento-corpo">
+              <div class="icone-aspas" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              <p class="texto-depoimento">
+                "Nunca fui fã de academias barulhentas. No Easy Move é diferente: os professores e estudantes universitários nos tratam com calma e paciência. As aulas em grupo viraram meu momento favorito da semana."
+              </p>
+            </div>
+            <div class="depoimento-autor">
+              <div class="autor-avatar" aria-hidden="true">AC</div>
+              <div class="autor-info">
+                <strong>Seu Antônio Carlos</strong>
+                <span>73 anos • Aluno há 1 ano</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Depoimento 3 (Familiar / Cuidador) -->
+          <article class="card-depoimento">
+            <div class="depoimento-corpo">
+              <div class="icone-aspas" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              <p class="texto-depoimento">
+                "Como filha, sinto uma tranquilidade imensa. Minha mãe estava perdendo a força nas pernas e desanimada. O acolhimento da equipe foi fantástico e a autonomia dela melhorou visivelmente."
+              </p>
+            </div>
+            <div class="depoimento-autor">
+              <div class="autor-avatar" aria-hidden="true">CL</div>
+              <div class="autor-info">
+                <strong>Cláudia Lemos</strong>
+                <span>Filha da Dona Neuza (79 anos)</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         9. PERGUNTAS FREQUENTES (FAQ)
+         Accordion totalmente acessível com ARIA e suporte completo a teclado
+         ======================================================================== -->
+    <section id="faq" class="secao-offwhite" aria-labelledby="titulo-faq">
+      <div class="conteiner">
+        
+        <div class="cabecalho-bloco-secao">
+          <span class="tag-secao">Tire suas dúvidas</span>
+          <h2 id="titulo-faq" class="titulo-secao">Perguntas frequentes</h2>
+          <p class="subtitulo-secao">Selecionamos as dúvidas mais comuns de quem está pensando em começar. Clique em cada pergunta para ver a resposta:</p>
+        </div>
+
+        <div class="lista-faq" role="region" aria-label="Perguntas e Respostas Frequentes">
+          
+          <!-- Item FAQ 1 -->
+          <div class="faq-item">
+            <button 
+              type="button" 
+              class="faq-botao" 
+              id="faq-btn-1" 
+              aria-expanded="false" 
+              aria-controls="faq-conteudo-1"
+            >
+              <span>Preciso ter experiência prévia com exercícios físicos?</span>
+              <span class="faq-icone-seta" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div 
+              id="faq-conteudo-1" 
+              class="faq-resposta" 
+              role="region" 
+              aria-labelledby="faq-btn-1" 
+              hidden
+            >
+              <p>Não! A maioria dos nossos alunos nunca havia feito exercícios regulares ou estava parada há anos. Todos os movimentos começam de forma leve, respeitando o seu ritmo atual e sem qualquer tipo de pressão.</p>
+            </div>
+          </div>
+
+          <!-- Item FAQ 2 -->
+          <div class="faq-item">
+            <button 
+              type="button" 
+              class="faq-botao" 
+              id="faq-btn-2" 
+              aria-expanded="false" 
+              aria-controls="faq-conteudo-2"
+            >
+              <span>Os exercícios são seguros para quem tem dor no joelho ou na coluna?</span>
+              <span class="faq-icone-seta" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div 
+              id="faq-conteudo-2" 
+              class="faq-resposta" 
+              role="region" 
+              aria-labelledby="faq-btn-2" 
+              hidden
+            >
+              <p>Sim, são completamente seguros porque são adaptados. Durante a avaliação inicial, nosso profissional de saúde identifica suas queixas e seleciona exercícios que fortalecem as articulações sem causar sobrecarga ou desconforto.</p>
+            </div>
+          </div>
+
+          <!-- Item FAQ 3 -->
+          <div class="faq-item">
+            <button 
+              type="button" 
+              class="faq-botao" 
+              id="faq-btn-3" 
+              aria-expanded="false" 
+              aria-controls="faq-conteudo-3"
+            >
+              <span>Como funciona a avaliação com o profissional?</span>
+              <span class="faq-icone-seta" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div 
+              id="faq-conteudo-3" 
+              class="faq-resposta" 
+              role="region" 
+              aria-labelledby="faq-btn-3" 
+              hidden
+            >
+              <p>É uma conversa tranquila e humanizada. Perguntamos sobre sua rotina, remédios de uso diário, dores e o que você gostaria de melhorar (como subir escadas ou passear com mais segurança). Testamos gestos simples de equilíbrio e flexibilidade para montar seu plano.</p>
+            </div>
+          </div>
+
+          <!-- Item FAQ 4 -->
+          <div class="faq-item">
+            <button 
+              type="button" 
+              class="faq-botao" 
+              id="faq-btn-4" 
+              aria-expanded="false" 
+              aria-controls="faq-conteudo-4"
+            >
+              <span>Preciso comprar aparelhos ou equipamentos caros?</span>
+              <span class="faq-icone-seta" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div 
+              id="faq-conteudo-4" 
+              class="faq-resposta" 
+              role="region" 
+              aria-labelledby="faq-btn-4" 
+              hidden
+            >
+              <p>De forma alguma. Os exercícios utilizam o peso do próprio corpo e objetos que você já tem em casa, como uma cadeira estável, uma toalha ou uma garrafinha de água. Não é necessário gastar com equipamentos extras.</p>
+            </div>
+          </div>
+
+          <!-- Item FAQ 5 -->
+          <div class="faq-item">
+            <button 
+              type="button" 
+              class="faq-botao" 
+              id="faq-btn-5" 
+              aria-expanded="false" 
+              aria-controls="faq-conteudo-5"
+            >
+              <span>Familiares ou cuidadores podem participar e acompanhar?</span>
+              <span class="faq-icone-seta" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div 
+              id="faq-conteudo-5" 
+              class="faq-resposta" 
+              role="region" 
+              aria-labelledby="faq-btn-5" 
+              hidden
+            >
+              <p>Com certeza! Incentivamos muito a presença da família e dos cuidadores. Eles são sempre bem-vindos para acompanhar a avaliação e as aulas, ajudando a criar uma rede ainda mais forte de apoio e carinho.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         10. CHAMADA FINAL (CTA)
+         Faixa em #365659 com texto branco e convite para agendar a avaliação
+         ======================================================================== -->
+    <section id="agendar" class="secao-cta-final" aria-labelledby="titulo-cta-final">
+      <div class="conteiner">
+        <div class="cta-conteudo-central">
+          <span class="tag-secao" style="margin-bottom: 20px;">Comece a cuidar de você hoje</span>
+          <h2 id="titulo-cta-final" class="cta-titulo">Dê o primeiro passo para ter mais equilíbrio, força e disposição</h2>
+          <p class="cta-texto">
+            Agende uma avaliação inicial acolhedora com nossa equipe especializada. É simples, sem compromisso e feito com toda a atenção que você merece.
+          </p>
+          <div class="cta-botoes">
+            <a href="tel:+5511999999999" class="btn btn-branco">Agendar minha avaliação agora</a>
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20do%20Easy%20Move" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: transparent; border: 2px solid var(--branco); color: var(--branco);">
+              Conversar no WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       11. RODAPÉ (FOOTER)
+       Logo, links, contato acessível, redes sociais e aviso legal médico
+       ========================================================================== -->
+  <footer id="contato" class="rodape-principal" role="contentinfo">
+    <div class="conteiner">
+      
+      <div class="rodape-grid">
+        
+        <!-- Coluna 1: Sobre e Logo -->
+        <div class="rodape-coluna-info">
+          <a href="#inicio" class="logo-link" aria-label="Easy Move - Voltar ao início">
+            <div class="logo-simbolo" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="4" r="2"></circle>
+                <path d="m15 11-3-2-3 2v4l3 3 3-3z"></path>
+                <path d="M6 13l3-1"></path>
+                <path d="M18 13l-3-1"></path>
+                <path d="m9 19 3 3 3-3"></path>
+              </svg>
+            </div>
+            <div class="logo-texto">
+              <span class="logo-nome">Easy Move</span>
+              <span class="logo-slogan">Movimento seguro e bem-estar</span>
+            </div>
+          </a>
+          <p class="rodape-descricao">
+            Plataforma dedicada a promover equilíbrio, mobilidade e independência para pessoas idosas, com acompanhamento de profissionais da saúde e estudantes voluntários.
+          </p>
+
+          <div>
+            <span style="font-weight: 700; display: block; margin-bottom: 10px;">Siga o Easy Move:</span>
+            <div class="redes-sociais-lista">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn-rede-social" aria-label="Instagram do Easy Move (abre em nova aba)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="btn-rede-social" aria-label="Facebook do Easy Move (abre em nova aba)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="btn-rede-social" aria-label="Canal do YouTube do Easy Move (abre em nova aba)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Navegação rápida -->
+        <div>
+          <h3 class="titulo-coluna-rodape">Navegação rápida</h3>
+          <ul class="lista-rodape-links">
+            <li><a href="#inicio" class="link-rodape">Início da página</a></li>
+            <li><a href="#beneficios" class="link-rodape">Benefícios do programa</a></li>
+            <li><a href="#como-funciona" class="link-rodape">Como funciona passo a passo</a></li>
+            <li><a href="#aulas-grupo" class="link-rodape">Aulas e atividades coletivas</a></li>
+            <li><a href="#quem-somos" class="link-rodape">Segurança e confiança</a></li>
+            <li><a href="#faq" class="link-rodape">Perguntas frequentes (FAQ)</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Contato direto -->
+        <div>
+          <h3 class="titulo-coluna-rodape">Fale com nossa equipe</h3>
+          <ul class="lista-rodape-contatos">
+            <li>
+              <a href="tel:+5511999999999" class="link-rodape">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span>(11) 99999-9999</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="link-rodape">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>Atendimento via WhatsApp</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:contato@easymove.com.br" class="link-rodape">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                <span>contato@easymove.com.br</span>
+              </a>
+            </li>
+            <li style="margin-top: 6px; font-size: 0.95rem; color: #D3E0D6;">
+              Horário de atendimento: Segunda a sexta, das 8h às 18h.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Aviso Legal Médico Obrigatório -->
+      <div class="aviso-medico-rodape" role="note" aria-label="Aviso legal de orientação médica">
+        <strong>Aviso Importante sobre Saúde:</strong>
+        <p>
+          As informações e conteúdos desta plataforma têm o objetivo de promover a saúde física, o bem-estar e a prevenção do sedentarismo. Eles não substituem diagnósticos clínicos, consultas especializadas ou tratamentos prescritos pelo seu médico de confiança. Antes de iniciar qualquer programa de exercícios físicos, consulte seu médico.
+        </p>
+      </div>
+
+      <!-- Linha final de direitos autorais -->
+      <div class="rodape-direitos">
+        <p>© 2026 Easy Move — Todos os direitos reservados. Feito com carinho para promover mais autonomia e qualidade de vida na melhor idade.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SCRIPTS JAVASCRIPT PURO
+       - Ajuste acessível de tamanho de fonte (A+, A-, normal)
+       - Alternância de Modo Alto Contraste (com persistência no localStorage)
+       - Menu Mobile com rótulo 'Menu' e acessibilidade por teclado
+       - Accordion acessível com suporte à tecla Enter/Espaço e ARIA states
+       - Anúncios dinâmicos para leitores de tela
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      'use strict';
+
+      // Elemento para anúncio de leitores de tela
+      var statusLeitorTela = document.getElementById('status-leitor-tela');
+
+      function avisarLeitorTela(mensagem) {
+        if (statusLeitorTela) {
+          statusLeitorTela.textContent = '';
+          // Pequeno timeout para garantir que leitores de tela registrem a mudança
+          setTimeout(function () {
+            statusLeitorTela.textContent = mensagem;
+          }, 60);
+        }
+      }
+
+      /* ======================================================================
+         1. AJUSTE DE TAMANHO DE FONTE (A+, A-, RESTAURAR)
+         Permite aumentar ou diminuir a escala tipográfica da página
+         ====================================================================== */
+      var fatorFonteAtual = 1;
+      var FATOR_MIN = 0.9;
+      var FATOR_MAX = 1.35;
+      var PASSO = 0.1;
+
+      // Recuperar preferência salva no navegador
+      try {
+        var fonteSalva = localStorage.getItem('easyMove_fatorFonte');
+        if (fonteSalva) {
+          fatorFonteAtual = parseFloat(fonteSalva);
+          aplicarFatorFonte(fatorFonteAtual, false);
+        }
+      } catch (e) {
+        console.warn('Não foi possível ler o localStorage:', e);
+      }
+
+      function aplicarFatorFonte(fator, notificar) {
+        // Limitar dentro dos limites mínimo e máximo
+        fatorFonteAtual = Math.min(Math.max(fator, FATOR_MIN), FATOR_MAX);
+        document.documentElement.style.setProperty('--fator-fonte', fatorFonteAtual);
+
+        try {
+          localStorage.setItem('easyMove_fatorFonte', fatorFonteAtual.toString());
+        } catch (e) {}
+
+        if (notificar) {
+          var porcentagem = Math.round(fatorFonteAtual * 100);
+          avisarLeitorTela('Tamanho do texto ajustado para ' + porcentagem + ' por cento');
+        }
+      }
+
+      var btnAumentar = document.getElementById('btn-aumentar-fonte');
+      var btnDiminuir = document.getElementById('btn-diminuir-fonte');
+      var btnResetar = document.getElementById('btn-resetar-fonte');
+
+      if (btnAumentar) {
+        btnAumentar.addEventListener('click', function () {
+          aplicarFatorFonte(fatorFonteAtual + PASSO, true);
+        });
+      }
+
+      if (btnDiminuir) {
+        btnDiminuir.addEventListener('click', function () {
+          aplicarFatorFonte(fatorFonteAtual - PASSO, true);
+        });
+      }
+
+      if (btnResetar) {
+        btnResetar.addEventListener('click', function () {
+          aplicarFatorFonte(1, true);
+        });
+      }
+
+      /* ======================================================================
+         2. MODO ALTO CONTRASTE
+         Fundo #0D0D0D, texto branco e botões brancos com texto preto
+         ====================================================================== */
+      var btnAltoContraste = document.getElementById('btn-alto-contraste');
+      var textoBtnContraste = document.getElementById('texto-btn-contraste');
+
+      function definirAltoContraste(ativo, notificar) {
+        if (ativo) {
+          document.documentElement.classList.add('alto-contraste');
+          btnAltoContraste.setAttribute('aria-pressed', 'true');
+          if (textoBtnContraste) textoBtnContraste.textContent = 'Contraste Normal';
+          if (notificar) avisarLeitorTela('Modo de alto contraste ativado');
+        } else {
+          document.documentElement.classList.remove('alto-contraste');
+          btnAltoContraste.setAttribute('aria-pressed', 'false');
+          if (textoBtnContraste) textoBtnContraste.textContent = 'Alto Contraste';
+          if (notificar) avisarLeitorTela('Modo de contraste padrão restaurado');
+        }
+
+        try {
+          localStorage.setItem('easyMove_altoContraste', ativo ? 'true' : 'false');
+        } catch (e) {}
+      }
+
+      // Recuperar estado de alto contraste salvo
+      try {
+        var contrasteSalvo = localStorage.getItem('easyMove_altoContraste');
+        if (contrasteSalvo === 'true') {
+          definirAltoContraste(true, false);
+        }
+      } catch (e) {}
+
+      if (btnAltoContraste) {
+        btnAltoContraste.addEventListener('click', function () {
+          var estaAtivo = document.documentElement.classList.contains('alto-contraste');
+          definirAltoContraste(!estaAtivo, true);
+        });
+      }
+
+      /* ======================================================================
+         3. MENU MOBILE COM RÓTULO VISÍVEL 'MENU'
+         Suporte para abrir/fechar, tecla Esc e fechar ao clicar em item
+         ====================================================================== */
+      var btnMenuMobile = document.getElementById('btn-menu-mobile');
+      var menuNavegacao = document.getElementById('menu-navegacao-principal');
+
+      if (btnMenuMobile && menuNavegacao) {
+        function fecharMenuMobile() {
+          menuNavegacao.classList.remove('menu-aberto');
+          btnMenuMobile.setAttribute('aria-expanded', 'false');
+          btnMenuMobile.setAttribute('aria-label', 'Abrir menu de navegação');
+        }
+
+        function abrirMenuMobile() {
+          menuNavegacao.classList.add('menu-aberto');
+          btnMenuMobile.setAttribute('aria-expanded', 'true');
+          btnMenuMobile.setAttribute('aria-label', 'Fechar menu de navegação');
+          avisarLeitorTela('Menu de navegação aberto');
+        }
+
+        btnMenuMobile.addEventListener('click', function () {
+          var aberto = menuNavegacao.classList.contains('menu-aberto');
+          if (aberto) {
+            fecharMenuMobile();
+          } else {
+            abrirMenuMobile();
+          }
+        });
+
+        // Fechar ao pressionar a tecla Escape
+        document.addEventListener('keydown', function (evento) {
+          if (evento.key === 'Escape' && menuNavegacao.classList.contains('menu-aberto')) {
+            fecharMenuMobile();
+            btnMenuMobile.focus();
+          }
+        });
+
+        // Fechar menu mobile automaticamente ao clicar em um link
+        var linksMenu = menuNavegacao.querySelectorAll('a');
+        linksMenu.forEach(function (link) {
+          link.addEventListener('click', function () {
+            if (menuNavegacao.classList.contains('menu-aberto')) {
+              fecharMenuMobile();
+            }
+          });
+        });
+      }
+
+      /* ======================================================================
+         4. PERGUNTAS FREQUENTES (ACCORDION ACESSÍVEL)
+         Controle via WAI-ARIA com suporte para navegação por teclado
+         ====================================================================== */
+      var botoesFaq = document.querySelectorAll('.faq-botao');
+
+      botoesFaq.forEach(function (botao) {
+        botao.addEventListener('click', function () {
+          var expandido = botao.getAttribute('aria-expanded') === 'true';
+          var painelId = botao.getAttribute('aria-controls');
+          var painel = document.getElementById(painelId);
+
+          if (!painel) return;
+
+          if (expandido) {
+            // Fechar o item atual
+            botao.setAttribute('aria-expanded', 'false');
+            painel.hidden = true;
+          } else {
+            // Abrir o item clicado
+            botao.setAttribute('aria-expanded', 'true');
+            painel.hidden = false;
+            avisarLeitorTela('Pergunta expandida: ' + botao.textContent.trim());
+          }
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>
+
